@@ -1,0 +1,272 @@
+<html xmlns:th="http://www.thymleaf.org">
+<head th:replace="head :: head">
+</head>
+<body>
+	<div th:replace="header :: header"></div>
+	<!-- Bread-crumb Section Start -->
+	<div class="section">
+		<!-- Bread-crumb Area Start -->
+		<div class="breadcrumb-area bg-light">
+			<div class="container-fluid">
+				<div class="breadcrumb-content text-center">
+					<h1 class="title">Shop Grid Sidebar</h1>
+					<ul>
+						<li><a th:href="@{/}">Home </a></li>
+						<li class="active">Shop</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Bread-crumb Area End -->
+	</div>
+	<!-- Bread-crumb Section End -->
+
+	<!-- Shop Section Start -->
+	<div class="section section-margin">
+		<div class="container">
+			<div class="row flex-row-reverse">
+				<div class="col-lg-9 col-12 col-custom">
+
+					<!--shop toolbar start-->
+					<div class="shop_toolbar_wrapper flex-column flex-md-row mb-10">
+
+						<!-- Shop Top Bar Left start -->
+						<div class="shop-top-bar-left mb-md-0 mb-2">
+							<!-- <div class="shop-top-show">
+                                <span>Showing 1–12 of 39 results</span>
+                            </div> -->
+						</div>
+						<!-- Shop Top Bar Left end -->
+
+						<!-- Shopt Top Bar Right Start -->
+						<div class="shop-top-bar-right">
+							<!-- <div class="shop-short-by mr-4">
+                                <select class="nice-select" aria-label=".form-select-sm example">
+                                    <option selected>Show 24</option>
+                                    <option value="1">Show 24</option>
+                                    <option value="2">Show 12</option>
+                                    <option value="3">Show 15</option>
+                                    <option value="3">Show 30</option>
+                                </select>
+                            </div> -->
+
+							<div class="shop-short-by mr-4">
+								<select class="nice-select" aria-label=".form-select-sm example">
+									<option selected>sort by Default</option>
+									<option value="1">sort by Price</option>
+
+								</select>
+							</div>
+
+							<div class="shop_toolbar_btn">
+								<button data-role="grid_3" type="button"
+									class="active btn-grid-4" title="Grid">
+									<i class="fa fa-th"></i>
+								</button>
+								<button data-role="grid_list" type="button" class="btn-list"
+									title="List">
+									<i class="fa fa-th-list"></i>
+								</button>
+							</div>
+						</div>
+						<!-- Shopt Top Bar Right End -->
+
+					</div>
+					<!--shop toolbar end-->
+
+				<!-- Shop Wrapper Start -->
+				<div class="row shop_wrapper grid_3">
+					<!-- Iterate Over Products Using For Loop-->
+					<!-- Single Product Start -->
+					<div th:each="product:${listings}"
+						class="col-lg-4 col-md-4 col-sm-6 product" data-aos="fade-up"
+						data-aos-delay="200">
+						<div class="product-inner">
+							<div class="thumb">
+								<a th:href="@{'/'+${product.listing_id}}" class="image"> 
+									<img class="first-image" th:src="'data:image/jpeg;base64,'+ ${imgUtil.getImgData(product.image_1)}" alt="Product" /> 
+									<img class="second-image" th:src="'data:image/jpeg;base64,'+ ${imgUtil.getImgData(product.image_1)}" alt="Product" />
+								</a>
+							</div>
+							<div class="content">
+								<h4 class="sub-title">
+									<a th:href="@{'/'+${product.listing_id}}" th:text="${product.listing_name}">Something</a>
+								</h4>
+								<h5 class="title">
+									<a th:href="@{'/'+${product.listing_id}}" th:text="${product.listing_name}">Listing Name</a>
+								</h5>
+								<p th:text="${product.decription}">Description</p>
+								<span th:text="'Rs.'+ ${product.price}" class="price"> <span class="new">$40.50</span></span>
+								<div class="shop-list-btn">
+									<a th:href="@{/}"><button
+											class="btn btn-sm btn-outline-dark btn-hover-primary"
+											title="Add To Cart">Book</button></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Single Product End -->
+
+					<!-- Iterate Over Products Using For Loop-->
+
+				</div>
+				<!-- Shop Wrapper End -->
+
+				<!--shop bottom toolbar start-->
+				<div class="shop_toolbar_wrapper mt-10">
+					Total Items: [[${totalItems}]]
+					<!-- Shop bottom Bar Left start  -->
+					<div class="shop-top-bar-left">
+						<!-- <div class="shop-short-by mr-4">
+                                <select class="nice-select rounded-0" aria-label=".form-select-sm example">
+                                    <option selected>Show 12 Per Page</option>
+                                    <option value="1">Show 12 Per Page</option>
+                                    <option value="2">Show 24 Per Page</option>
+                                    <option value="3">Show 15 Per Page</option>
+                                    <option value="3">Show 30 Per Page</option>
+                                </select>
+                            </div> -->
+					</div>
+					<!-- Shop Bottom Bar Left end -->
+
+					<!-- Shopt Top Bar Right Start -->
+					<div th:if="${totalPages>1}" class="shop-top-bar-right">
+						<nav>
+							<ul class="pagination">
+								<li th:unless="@{currentPage > 1}" class="page-item disabled">
+									<a class="page-link" th:href="@{'/page/' + ${currentPage - 1}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a>
+								</li>
+								<li th:if="${currentPage > 1}" class="page-item"><a
+									class="page-link active" th:href="@{'/page/1'}">1</a></li>
+								<li th:each="i:${#numbers.sequence(1,totalPages)}"
+									class="page-item"><a th:if="${currentPage != i}"
+									class="page-link" th:href="@{'/page/' + ${i}">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li th:if="${currentPage < totalPages}" class="page-item"><a
+									class="page-link" th:href="@{'/page/' + ${currentPage + 1}}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a></li>
+							</ul>
+						</nav>
+					</div>
+					<!-- Shopt bottom Bar Right End -->
+
+				</div>
+				<!--shop boottom toolbar end-->
+			</div>
+			<!-- Sidebar Widget Start -->
+			<div class="col-lg-3 col-12 col-custom">
+
+				<aside class="sidebar_widget mt-10 mt-lg-0">
+					<div class="widget_inner" data-aos="fade-up" data-aos-delay="200">
+						<div class="widget-list mb-10">
+							<h3 class="widget-title mb-4">Search</h3>
+							<div class="search-box">
+								<input type="text" class="form-control"
+									placeholder="Search Our Store" aria-label="Search Our Store">
+								<button class="btn btn-dark btn-hover-primary" type="button">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+						</div>
+
+						<!-- Category Section Starts -->
+						<div class="widget-list mb-10">
+							<h3 class="widget-title">Categories</h3>
+							<div class="sidebar-body">
+								<ul class="sidebar-list" th:each="tempCategory:${allCategories}">
+									<a th:href="@{/}">
+										<li th:text="${tempCategory.category_name}"></li>
+									</a>
+								</ul>
+							</div>
+						</div>
+						<!-- Category Section Ends -->
+
+						<!-- Recent Product Section Start -->
+						<div class="widget-list">
+							<h3 class="widget-title mb-4">Recent Products</h3>
+							<div class="sidebar-body product-list-wrapper mb-n6">
+								<!-- Single Product List Start -->
+								<div class="single-product-list product-hover mb-6">
+									<div class="thumb">
+										<a href="single-product.html" class="image"> <img
+											class="first-image" src="images/products/small-product/1.jpg"
+											alt="Product" /> <img class="second-image"
+											src="images/products/small-product/5.jpg" alt="Product" />
+										</a>
+									</div>
+									<div class="content">
+										<h5 class="title">
+											<a href="single-product.html">Brother Hoddies in Grey</a>
+										</h5>
+										<span class="price"> <span class="new">$38.00</span>
+
+										</span>
+
+									</div>
+								</div>
+								<!-- Single Product List End -->
+
+								<!-- Single Product List Start -->
+								<div class="single-product-list product-hover mb-6">
+									<div class="thumb">
+										<a href="single-product.html" class="image"> <img
+											class="first-image" src="images/products/small-product/2.jpg"
+											alt="Product" /> <img class="second-image"
+											src="images/products/small-product/3.jpg" alt="Product" />
+										</a>
+									</div>
+									<div class="content">
+										<h5 class="title">
+											<a href="/productdetail">Basic Jogging Shorts</a>
+										</h5>
+										<span class="price"> <span class="new">$21.00</span> <span
+											class="old">$22.50</span>
+										</span> <span class="ratings"> <span class="rating-wrap">
+												<span class="star" style="width: 60%"></span>
+										</span> <span class="rating-num">(4)</span>
+										</span>
+									</div>
+								</div>
+								<!-- Single Product List End -->
+
+								<!-- Single Product List Start -->
+								<div class="single-product-list product-hover mb-6">
+									<div class="thumb">
+										<a href="/productdetail" class="image"> <img
+											class="first-image" src="images/products/small-product/4.jpg"
+											alt="Product" /> <img class="second-image"
+											src="images/products/small-product/10.jpg" alt="Product" />
+										</a>
+									</div>
+									<div class="content">
+										<h5 class="title">
+											<a href="/productdetail">Simple Woven Fabrics</a>
+										</h5>
+										<span class="price"> <span class="new">$86.00</span> <span
+											class="old">$90.00</span>
+										</span> <span class="ratings"> <span class="rating-wrap">
+												<span class="star" style="width: 80%"></span>
+										</span> <span class="rating-num">(1)</span>
+										</span>
+									</div>
+								</div>
+								<!-- Single Product List End -->
+							</div>
+						</div>
+						<!-- Recent Product Section Start -->
+					</div>
+				</aside>
+				<!-- Sidebar Widget End -->
+			</div>
+			<!-- Sidebar Widget Start -->
+		</div>
+	</div>
+	</div>
+	<!-- Shop Section End -->
+	<div th:replace="footer :: foot"></div>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<html xmlns:th="http://www.thymleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="head :: head">
+</head>
+<body>
+	<div th:replace="header :: header"></div>
+	<!-- Breadcrumb Section Start -->
+	<div class="section">
+
+		<!-- Breadcrumb Area Start -->
+		<div class="breadcrumb-area bg-light">
+			<div class="container-fluid">
+				<div class="breadcrumb-content text-center">
+					<h1 class="title">Add New Listing</h1>
+					<ul>
+						<li><a th:href="@{/}">Home </a></li>
+						<li class="active">New Listing</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Breadcrumb Area End -->
+	</div>
+	<!-- Breadcrumb Section End -->
+
+	<!--Modal Start-->
+	<div th:if="${message}">
+		<h2 th:text="${message}"/>
+	</div>
+	<div sec:authorize="isAuthenticated()" id="id01" class="w3-modal w3-animate-opacity">
+		<div class="w3-modal-content w3-card-4" style="border-radius: 5px; margin-top: 120px">
+			<div class="w3-container">
+				<div class="login-wrapper" style="margin:55px">
+					<!-- New lISTING body Start -->
+					<div class="section-content text-center mb-5">
+						<h2 th:text="${heading}" class="title mb-2">Add A Product</h2>
+					</div>
+					<!-- New Listing Content End -->
+
+					<!-- Form Action Start -->
+					<form th:action="@{${action}}" method="post" th:object="${listing}" enctype="multipart/form-data">
+						 <input type="hidden" th:field="*{listing_id}"/>
+						<!-- Input Email Start -->
+						<div class="single-input-item mb-3">
+							<input type="text" th:field="*{listing_name}" name="listing_name" placeholder="Product Name" required>
+						</div>
+						<!-- Input Email End -->
+
+						<!-- Input Password Start -->
+						<div class="single-input-item mb-3">
+							<textarea th:field="*{decription}" name="decription" style="width: 100%; border: none"
+								placeholder="Product Description" required></textarea>
+						</div>
+						
+						<div class="single-input-item mb-3">
+							<input type="number" th:field="*{price}" name="price" placeholder="Price" required>
+						</div>
+						<div class="single-input-item mb-3">
+							<input type="file" id="file1" name="file1"  accept="image/jpeg" placeholder="Image" required>
+						</div>
+						<div class="single-input-item mb-3">
+							<input type="file" name="file2"  accept="image/jpeg" placeholder="Image" required>
+						</div>
+						<div class="single-input-item mb-3">
+							<input type="file" name="file3"  accept="image/jpeg" placeholder="Image" required>
+						</div>
+						<div class="single-input-item mb-3">
+							<input type="file" name="file4"  accept="image/jpeg" placeholder="Image" required>
+						</div>
+						<div class="single-input-item mb-3">
+							<select th:field="*{category}" name="category" id=""
+								style="width: 100%; padding: 5px; border: none">
+								<option value="">Select a category</option>
+								<option th:each="list: ${categories}" th:value="${list.category_id}" th:text="${list.category_name}">Category1</option>
+							</select>
+						</div>
+						<div style=" margin-bottom:35px" >
+							<input style="display:inline;"  type="checkbox" th:field="*{availability}" name="availability">
+							<label>Available</label>
+						</div>
+						<!--  Button Start -->
+						<div class="single-input-item mb-3" style="width: 100%">
+							<button th:text="${submit}" type="submit" style="margin: auto" 	class="btn btn btn-dark btn-hover-primary rounded-0">Submit</button>
+						</div>
+						<!--  Button End -->
+					</form>
+					<!-- Form Action End -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Modal End-->
+	<div sec:authorize="!isAuthenticated()">
+	<a th:href="@{/login}">Click here to first Login</a>
+	</div>
+	<div th:replace="footer :: foot"></div>
+</body>
+</html>

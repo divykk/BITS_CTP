@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymleaf.org">
+<head th:replace="head :: head">
+</head>
+<body>
+	<div th:replace="header :: header"></div>
+	<!-- Breadcrumb Section Start -->
+	<div class="section">
+
+		<!-- Breadcrumb Area Start -->
+		<div class="breadcrumb-area bg-light">
+			<div class="container-fluid">
+				<div class="breadcrumb-content text-center">
+					<h1 class="title">Shop Grid Sidebar</h1>
+					<ul>
+						<li><a th:href="@{/}">Home </a></li>
+						<li class="active">Shop</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Breadcrumb Area End -->
+
+	</div>
+	<!-- Breadcrumb Section End -->
+	
+	
+	<table>
+	<tbody>
+	<tr th:each="tempCategory:${allCategories}">
+	<td th:text="${tempCategory.category_name}"/>
+	
+	</tr>
+	</tbody>
+	</table>
+	<br>
+	<div class="gifs container">
+    <div class="row">
+        <div th:each="gif : ${listings}" class="col s12 l4">
+            <a th:href="@{/page/${cuurentPage}}" class="actions">
+                <img th:src="${gif.image_1}" alt="gif" />
+            </a>
+        </div>
+    </div>
+</div>
+	
+	
+	<div th:replace="footer :: foot"></div>
+</body>
+
+</html>
