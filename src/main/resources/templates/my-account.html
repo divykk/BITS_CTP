@@ -69,25 +69,23 @@
                                             <table class="table table-bordered">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th>Order</th>
-                                                        <th>Product</th>
+                                                        <th>Listing Name</th>
                                                         <th>Date</th>
-                                                        <th>Status</th>
-                                                        <th>Total</th>
+                                                        <th>Availability</th>
+                                                        <th>Price</th>
                                                         <th>Action</th>
                                                         <th>Remove</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td><a href="./single-product-normal.html">Product Name</a></td>
-                                                        <td>Aug 22, 2018</td>
-                                                        <td>Pending</td>
-                                                        <td>$3000</td>
+                                                    <tr th:each="listing:${userListings}">                                                     
+                                                        <td th:text="${listing.listing_name}"><a href="">Product Name</a></td>                                                      
+                                                        <td th:text="${#temporals.format(listing.dateUploaded,'dd-MM-yyyy')}">Aug 22, 2018</td>
+                                                        <td th:text="${listing.availability}? 'Yes':'No'">Yes</td>
+                                                        <td th:text="${listing.price}">$3000</td>
                                                         <td><a href="./Booking-Details.html" class="btn btn btn-dark btn-hover-primary btn-sm rounded-0">View</a></td>
-                                                        <td><a href="#"><i style="font-size:25px;margin-left: 35%;margin-top:auto"
-                                                                    class="pe-7s-trash"></i></a></td>
+                                                        <td><form method="post" th:action="@{'/myaccount/delete/'+ ${listing.listing_id}}"><button type="submit"><i style="font-size:25px;margin-left: 35%;margin-top:auto"
+                                                                    class="pe-7s-trash"></i></button></form></td>
                                                     </tr>
 
                                                 </tbody>

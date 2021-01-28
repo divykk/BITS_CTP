@@ -19,7 +19,15 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class ListingServiceImpl implements ListingService {
 	
+	
 	private ListingRepo theListingRepo;
+	@Override
+	public List<Listing> findAllByUserID(long theUserId) {
+		// TODO Auto-generated method stub
+		return theListingRepo.findAllByUserId(theUserId);
+		
+	}
+
 	@Autowired
 	public ListingServiceImpl(ListingRepo theListingRepo) {
 		this.theListingRepo = theListingRepo;
@@ -30,7 +38,7 @@ public class ListingServiceImpl implements ListingService {
 		// TODO Auto-generated method stub
 		return theListingRepo.findAll();
 	}
-
+	
 	@Override
 	public Listing findById(int theId) {
 		// TODO Auto-generated method stub

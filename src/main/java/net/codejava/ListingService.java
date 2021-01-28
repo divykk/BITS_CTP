@@ -16,4 +16,5 @@ public interface ListingService {
 	public Page<Listing> findAllPaged(int pageNumber);
 	public Page<Listing> findAllPagedSortedByPrice(int pageNumber);
 	public Page<Listing> findAllPagedSortedByTime(int pageNumber);
+	public List<Listing> findAllByUserID(long theUserId);
 }
