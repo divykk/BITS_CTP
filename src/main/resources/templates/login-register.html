@@ -12,7 +12,7 @@
 				<div class="breadcrumb-content text-center">
 					<h1 class="title">Login | Register</h1>
 					<ul>
-						<li><a href="/index">Home </a></li>
+						<li><a th:href="@{/}">Home </a></li>
 						<li class="active">Login | Register</li>
 					</ul>
 				</div>
@@ -41,7 +41,7 @@
 						<!-- Login Title & Content End -->
 						<!-- Check for login error -->
 						<div th:if="${param.error}">
-							<span>Invalid Username and password.</span>
+							<span>Invalid Details.</span>
 						</div>
 						<!-- Check for login error -->
 						<!-- Form Action Start -->
@@ -110,84 +110,74 @@
 						<!-- Form Action Start -->
 						<form th:action="@{/process_register}" th:object="${user}"
 							method="post">
-							<!-- Check for login error -->
-							<ul th:if="${#fields.hasErrors('global')}">
-								<li th:each="error : ${#fields.errors('global')}"
-									th:text="${error}">error</li>
-							</ul>
-							<!-- Check for login error -->
-							<!-- Input First Name Start -->
-							<div class="single-input-item mb-3">
-								<input type="text" th:field="*{first_name}"
-									placeholder="First Name">
-							</div>
-							<!-- Input First Name End -->
 
-							<!-- Input Last Name Start -->
-							<div class="single-input-item mb-3">
-								<input type="text" th:field="*{last_name}"
-									placeholder="Last Name">
-							</div>
+					<!-- Input First Name Start -->
+					<div class="single-input-item mb-3">
+						<input type="text" th:field="*{first_name}"
+							placeholder="First Name" required> <span
+							th:if="${#fields.hasErrors('first_name')}"
+							th:errors="*{first_name}"> First Name</span>
+					</div>
+					<!-- Input First Name End -->
 
-							<!-- Input Last Name End -->
+					<!-- Input Last Name Start -->
+					<div class="single-input-item mb-3">
+						<input type="tel" th:field="*{mobile}" placeholder="Mobile Number"
+							required> <span th:if="${#fields.hasErrors('mobile')}"
+							th:errors="*{mobile}"> Mobile</span>
+					</div>
 
-							<!-- Input Email Or Username Start -->
-							<div class="single-input-item mb-3">
-								<input type="email" th:field="*{username}"
-									th:classappend="${#fields.hasErrors('username')} ? 'error-field'"
-									placeholder="Email or Username">
-							</div>
-							<!-- Input Email Or Username End -->
+					<!-- Input Last Name End -->
 
-							<!-- Input Password Start -->
-							<div class="single-input-item mb-3">
-								<input type="password" th:field="*{password}"
-									placeholder="Enter your Password">
-							</div>
-							<!-- Input Password End -->
+					<!-- Input Email Or Username Start -->
+					<div class="single-input-item mb-3">
+						<input type="email" th:field="*{username}"
+							placeholder="Email or Userame" required> <span
+							th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+							Mobile</span>
+					</div>
+					<!-- Input Email Or Username End -->
 
-							<!-- Checkbox & Subscribe Label Start -->
-							<div class="single-input-item mb-3">
-								<div
-									class="login-reg-form-meta d-flex align-items-center justify-content-between">
-									<div class="remember-meta mb-3">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input"
-												id="rememberMe-2"> <label
-												class="custom-control-label" for="rememberMe-2">Subscribe
-												Our Newsletter</label>
-										</div>
-									</div>
+					<!-- Input Password Start -->
+					<div class="single-input-item mb-3">
+						<input type="password" th:field="*{password}"
+							placeholder="Enter your Password">
+					</div>
+					<!-- Input Password End -->
+
+					<!-- Checkbox & Subscribe Label Start -->
+					<div class="single-input-item mb-3">
+						<div
+							class="login-reg-form-meta d-flex align-items-center justify-content-between">
+							<div class="remember-meta mb-3">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input"
+										id="rememberMe-2"> <label class="custom-control-label"
+										for="rememberMe-2">Subscribe Our Newsletter</label>
 								</div>
 							</div>
-							<!-- Checkbox & Subscribe Label End -->
-
-							<!-- Register Button Start -->
-							<div class="single-input-item mb-3">
-								<button type="submit"
-									class="btn btn btn-dark btn-hover-primary rounded-0">Register</button>
-							</div>
-							<!-- Register Button End -->
-
-						</form>
-						<!-- Form Action End -->
-
+						</div>
 					</div>
-					<!-- Register Wrapper End -->
-				</div>
-			</div>
+					<!-- Checkbox & Subscribe Label End -->
 
+					<!-- Register Button Start -->
+					<div class="single-input-item mb-3">
+						<button type="submit"
+							class="btn btn btn-dark btn-hover-primary rounded-0">Register</button>
+					</div>
+					<!-- Register Button End -->
+
+					</form>
+					<!-- Form Action End -->
+
+				</div>
+				<!-- Register Wrapper End -->
+			</div>
 		</div>
+
+	</div>
 	</div>
 	<!-- Login | Register Section End -->
-
-
-
-
-
-
-
-
 	<div th:replace="footer :: foot"></div>
 </body>
 </html>

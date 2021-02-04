@@ -92,6 +92,7 @@
 	<!--Modal End-->
 	<div sec:authorize="!isAuthenticated()">
 	<a th:href="@{/login}">Click here to first Login</a>
+	
 	</div>
 	<div th:replace="footer :: foot"></div>
 </body>

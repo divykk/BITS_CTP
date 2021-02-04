@@ -14,7 +14,7 @@
                         <li>
                             <a th:href="@{/}">Home </a>
                         </li>
-                        <li class="active"> Single Product Normal</li>
+                        <li class="active">Listing</li>
                     </ul>
                 </div>
             </div>
@@ -37,19 +37,19 @@
                         <!-- Single Product Image Start -->
                         <div class="single-product-img swiper-container gallery-top" style="height:fit-content">
                             <div class="swiper-wrapper popup-gallery">
-                                <a class="swiper-slide w-100" href="images/products/large-size/1.jpg">
+                                <a class="swiper-slide w-100" th:href="'data:image/jpeg;base64,'+ ${imgUtil.getImgData(product.image_1)}">
                                     <img class="w-100" th:src="'data:image/jpeg;base64,'+ ${imgUtil.getImgData(product.image_1)}" alt="Product">
                                 </a>
-                                <a class="swiper-slide w-100" href="images/products/large-size/2.jpg">
+                                <a class="swiper-slide w-100" th:href="'data:image/jpeg;base64,'+ ${imgUtil.getImgData(product.image_2)}">
                                     <img class="w-100" th:src="'data:image/jpeg;base64,'+ ${imgUtil.getImgData(product.image_2)}" alt="Product">
                                 </a>
-                                <a class="swiper-slide w-100" href="images/products/large-size/3.jpg">
+                                <a class="swiper-slide w-100" th:href="'data:image/jpeg;base64,'+ ${imgUtil.getImgData(product.image_3)}">
                                     <img class="w-100" th:src="'data:image/jpeg;base64,'+ ${imgUtil.getImgData(product.image_3)}" alt="Product">
                                 </a>
-                                <a class="swiper-slide w-100" href="images/products/large-size/4.jpg">
+                                <a class="swiper-slide w-100" th:href="'data:image/jpeg;base64,'+ ${imgUtil.getImgData(product.image_4)}">
                                     <img class="w-100" th:src="'data:image/jpeg;base64,'+ ${imgUtil.getImgData(product.image_4)}" alt="Product">
                                 </a>             
-                                <a class="swiper-slide w-100" href="images/products/large-size/4.jpg">
+                                <a class="swiper-slide w-100" th:href="'data:image/jpeg;base64,'+ ${imgUtil.getImgData(product.image_1)}">
                                     <img class="w-100" th:src="'data:image/jpeg;base64,'+ ${imgUtil.getImgData(product.image_1)}" alt="Product">
                                 </a>                  
                             </div>
@@ -130,7 +130,7 @@
                         <div class="cart-wishlist-btn mb-4">
 
                             <div class="add-to-wishlist">
-                                <a class="btn btn-outline-dark btn-hover-primary" href="#">Book</a>
+                                <a th:href="${#authorization.expression('isAuthenticated()')} ? |/book/${product.listing_id}| :'/login'" class="btn btn-outline-dark btn-hover-primary">Book</a>
                                 <!-- <a class="btn btn-outline-dark ">Booked</a> -->
                             </div>
                         </div>
@@ -148,12 +148,9 @@
 
                         <!-- Product Delivery Policy Start -->
                         <ul class="product-delivery-policy border-top pt-4 mt-4 border-bottom pb-4">
-                            <li> <i class="fa fa-check-square"></i> <span>Security Policy (Edit With Customer
-                                    Reassurance Module)</span></li>
-                            <li><i class="fa fa-truck"></i><span>Delivery Policy (Edit With Customer Reassurance
-                                    Module)</span></li>
-                            <li><i class="fa fa-refresh"></i><span>Return Policy (Edit With Customer Reassurance
-                                    Module)</span></li>
+                            <li> <i class="fa fa-check-square"></i> <span>Security Policy (Not Applicable)</span></li>
+                            <li><i class="fa fa-truck"></i><span>Delivery Policy Security Policy (Not Applicable)</span></li>
+                            <li><i class="fa fa-refresh"></i><span>Return Policy Security Policy (Not Applicable)</span></li>
                         </ul>
                         <!-- Product Delivery Policy End -->
 
